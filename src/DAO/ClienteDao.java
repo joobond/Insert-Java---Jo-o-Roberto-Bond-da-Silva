@@ -7,7 +7,10 @@ package DAO;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
 import model.Cliente;
 
 /**
@@ -64,5 +67,23 @@ public class ClienteDao {
             throw new RuntimeException(e);
         }
 
+    }
+
+    public void visualizarClientes() {
+        String sql = "SELECT * FROM cliente";
+        try {
+            PreparedStatement stmt = con.prepareStatement(sql);
+            ResultSet rs = stmt.executeQuery(sql);
+
+            while (rs.next()) {
+                System.out.println("ID: "+rs.getInt("idCliente"));
+                System.out.println("Nome: "+rs.getString("nome"));
+                System.out.println("-----------------------------");
+            }
+            
+            stmt.close();
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
     }
 }

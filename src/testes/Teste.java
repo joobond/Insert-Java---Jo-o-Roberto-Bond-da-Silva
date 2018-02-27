@@ -30,15 +30,16 @@ public class Teste {
         // TODO code application logic here
         
         //Produto
-        Produto p = new Produto();
-        p.setIdproduto(1);
+//        Produto p = new Produto();
+//        p.setIdproduto(1);
 //        p.setNome("Camisinha");
 //        p.setPreco(14.80);
 //        p.setQuantidade(10);
-//        
-        ProdutoDao pdao = new ProdutoDao();
+////        
+//        ProdutoDao pdao = new ProdutoDao();
 //        pdao.inserirProduto(p);
-        pdao.deletarProduto(p);
+//        pdao.deletarProduto(p);
+//        pdao.visualizarProdutos();
         
         //Serviço
 //        Servico serv = new Servico();
@@ -46,23 +47,25 @@ public class Teste {
 //        serv.setNome("Acompanhante");
 //        serv.setValor(200);
 //        
-//        ServicoDao sdao = new ServicoDao();
+        ServicoDao sdao = new ServicoDao();
 //        sdao.inserirServico(serv);
 //        sdao.deletarServico(serv);
+        sdao.visualizarServicos();
         
         
-        //Serviço
+        //Cliente
 //        Cliente cli = new Cliente();
-//        cli.setIdCliente(1);
-//        cli.setNome("Robson Hammer");
+//        cli.setIdCliente(2);
+//        cli.setNome("Eclesio Melo");
 //        cli.setEndereco("Rua dos Bobos Nº 0");
 //        cli.setIdade(19);
 //        cli.setCpf(654321);
 //        cli.setSexo("M");
-        
+//        
 //        ClienteDao cdao = new ClienteDao();
 //        cdao.inserirCliente(cli);
 //        cdao.deletarCliente(cli);
+//        cdao.visualizarClientes();
        
         
     }

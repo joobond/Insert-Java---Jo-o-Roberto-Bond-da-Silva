@@ -7,6 +7,7 @@ package DAO;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 import model.Servico;
 
@@ -60,5 +61,23 @@ public class ServicoDao {
             throw new RuntimeException(e);
         }
 
+    }
+    
+    public void visualizarServicos() {
+        String sql = "SELECT * FROM servico";
+        try {
+            PreparedStatement stmt = con.prepareStatement(sql);
+            ResultSet rs = stmt.executeQuery(sql);
+
+            while (rs.next()) {
+                System.out.println("ID: "+rs.getInt("idservico"));
+                System.out.println("Descrição: "+rs.getString("nome"));
+                System.out.println("-----------------------------");
+            }
+            
+            stmt.close();
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
     }
 }
