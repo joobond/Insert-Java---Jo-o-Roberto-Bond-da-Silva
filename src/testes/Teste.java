@@ -33,30 +33,32 @@ public class Teste {
 //        Produto p = new Produto();
 //        p.setIdproduto(1);
 //        p.setNome("Camisinha");
-//        p.setPreco(14.80);
+//        p.setPreco(15);
 //        p.setQuantidade(10);
 ////        
 //        ProdutoDao pdao = new ProdutoDao();
 //        pdao.inserirProduto(p);
 //        pdao.deletarProduto(p);
+//        pdao.atualizarProduto(p);
 //        pdao.visualizarProdutos();
         
         //Serviço
 //        Servico serv = new Servico();
 //        serv.setIdservico(1);
-//        serv.setNome("Acompanhante");
+//        serv.setNome("Acompanhantes");
 //        serv.setValor(200);
 //        
-        ServicoDao sdao = new ServicoDao();
+//        ServicoDao sdao = new ServicoDao();
 //        sdao.inserirServico(serv);
 //        sdao.deletarServico(serv);
-        sdao.visualizarServicos();
+//        sdao.atualizarServico(serv);
+//        sdao.visualizarServicos();
         
         
         //Cliente
 //        Cliente cli = new Cliente();
 //        cli.setIdCliente(2);
-//        cli.setNome("Eclesio Melo");
+//        cli.setNome("João Bond");
 //        cli.setEndereco("Rua dos Bobos Nº 0");
 //        cli.setIdade(19);
 //        cli.setCpf(654321);
@@ -66,6 +68,7 @@ public class Teste {
 //        cdao.inserirCliente(cli);
 //        cdao.deletarCliente(cli);
 //        cdao.visualizarClientes();
+//        cdao.atualizarCliente(cli);
        
         
     }

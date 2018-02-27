@@ -16,33 +16,34 @@ import model.Servico;
  * @author Bond
  */
 public class ServicoDao {
+
     private final Connection con;
 
     public ServicoDao() throws SQLException {
         this.con = Conexao.getConnection();
     }
-    
-    public void inserirServico(Servico serv){
+
+    public void inserirServico(Servico serv) {
         String sql = "INSERT INTO servico (idservico,nome,valor) VALUES (?,?,?)";
-        
+
         try {
-            PreparedStatement stmt =  con.prepareStatement(sql);
-            
+            PreparedStatement stmt = con.prepareStatement(sql);
+
             //Passando a informação
             stmt.setInt(1, serv.getIdservico());
             stmt.setString(2, serv.getNome());
             stmt.setDouble(3, serv.getValor());
-            
+
             //Executando a query
             stmt.execute();
-            System.out.println(serv.getNome()+" inserido com sucesso!");
+            System.out.println(serv.getNome() + " inserido com sucesso!");
             //Fechando a conexao
             stmt.close();
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
     }
-    
+
     public void deletarServico(Servico serv) throws SQLException {
         String sql = "DELETE FROM servico WHERE idservico=?";
 
@@ -62,7 +63,7 @@ public class ServicoDao {
         }
 
     }
-    
+
     public void visualizarServicos() {
         String sql = "SELECT * FROM servico";
         try {
@@ -70,11 +71,32 @@ public class ServicoDao {
             ResultSet rs = stmt.executeQuery(sql);
 
             while (rs.next()) {
-                System.out.println("ID: "+rs.getInt("idservico"));
-                System.out.println("Descrição: "+rs.getString("nome"));
+                System.out.println("ID: " + rs.getInt("idservico"));
+                System.out.println("Descrição: " + rs.getString("nome"));
                 System.out.println("-----------------------------");
             }
-            
+
+            stmt.close();
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    public void atualizarServico(Servico serv) {
+        String sql = "UPDATE servico SET nome=?,valor=? WHERE idservico=?";
+
+        try {
+            PreparedStatement stmt = con.prepareStatement(sql);
+
+            //Passando a informação
+            stmt.setString(1, serv.getNome());
+            stmt.setDouble(2, serv.getValor());
+            stmt.setInt(3, serv.getIdservico());
+
+            //Executando a query
+            stmt.execute();
+            System.out.println(serv.getNome() + " atualizado com sucesso!");
+            //Fechando a conexao
             stmt.close();
         } catch (SQLException e) {
             throw new RuntimeException(e);

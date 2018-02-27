@@ -82,4 +82,26 @@ public class ProdutoDao {
             throw new RuntimeException(e);
         }
     }
+    
+    public void atualizarProduto(Produto pro) {
+        String sql = "UPDATE produto SET nome=?,preco=?,quantidade=? WHERE idproduto=?";
+
+        try {
+            PreparedStatement stmt = con.prepareStatement(sql);
+
+            //Passando a informação
+            stmt.setString(1, pro.getNome());
+            stmt.setDouble(2, pro.getPreco());
+            stmt.setFloat(3, pro.getQuantidade());
+            stmt.setInt(4, pro.getIdproduto());
+
+            //Executando a query
+            stmt.execute();
+            System.out.println(pro.getNome() + " atualizado com sucesso!");
+            //Fechando a conexao
+            stmt.close();
+            } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+    }
 }

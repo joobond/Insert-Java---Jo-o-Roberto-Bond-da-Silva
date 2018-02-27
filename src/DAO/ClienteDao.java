@@ -86,4 +86,28 @@ public class ClienteDao {
             throw new RuntimeException(e);
         }
     }
+    
+    public void atualizarCliente(Cliente cli) {
+        String sql = "UPDATE cliente SET nome=?,endereco=?,idade=?,cpf=?,sexo=? WHERE idCliente=?";
+
+        try {
+            PreparedStatement stmt = con.prepareStatement(sql);
+
+            //Passando a informação
+            stmt.setString(1, cli.getNome());
+            stmt.setString(2, cli.getEndereco());
+            stmt.setInt(3, cli.getIdade());
+            stmt.setFloat(4, cli.getCpf());
+            stmt.setString(5, cli.getSexo());
+            stmt.setInt(6, cli.getIdCliente());
+
+            //Executando a query
+            stmt.execute();
+            System.out.println(cli.getNome() + " atualizado com sucesso!");
+            //Fechando a conexao
+            stmt.close();
+            } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+    }
 }
