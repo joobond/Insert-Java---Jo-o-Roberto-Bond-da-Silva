@@ -4,6 +4,8 @@ import DAO.ClienteDao;
 import DAO.ProdutoDao;
 import DAO.ServicoDao;
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
 import model.Cliente;
 import model.Produto;
 import model.Servico;
@@ -35,12 +37,19 @@ public class Teste {
 //        p.setNome("Camisinha");
 //        p.setPreco(15);
 //        p.setQuantidade(10);
+        List<Produto> listaProduto = new ArrayList<>();
 ////        
-//        ProdutoDao pdao = new ProdutoDao();
+        ProdutoDao pdao = new ProdutoDao();
 //        pdao.inserirProduto(p);
 //        pdao.deletarProduto(p);
 //        pdao.atualizarProduto(p);
-//        pdao.visualizarProdutos();
+        listaProduto=pdao.consultarProdutos();
+        
+        for(Produto p : listaProduto){
+            System.out.println("ID: "+p.getIdproduto());
+            System.out.println("Nome: "+p.getNome());
+            System.out.println("---------------------------");
+        }
         
         //Serviço
 //        Servico serv = new Servico();

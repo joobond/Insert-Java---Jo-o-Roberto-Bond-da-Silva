@@ -69,24 +69,55 @@ public class ClienteDao {
 
     }
 
-    public void visualizarClientes() {
+    public List<Cliente> consultarClientes() {
         String sql = "SELECT * FROM cliente";
         try {
             PreparedStatement stmt = con.prepareStatement(sql);
             ResultSet rs = stmt.executeQuery(sql);
+            List<Cliente> retorno = new ArrayList<>();
 
             while (rs.next()) {
-                System.out.println("ID: "+rs.getInt("idCliente"));
-                System.out.println("Nome: "+rs.getString("nome"));
-                System.out.println("-----------------------------");
+                Cliente cli = new Cliente();
+                cli.setIdCliente(rs.getInt("idCliente"));
+                cli.setNome(rs.getString("nome"));
+                cli.setEndereco(rs.getString("endereco"));
+                cli.setIdade(rs.getInt("idade"));
+                cli.setCpf(rs.getFloat("cpf"));
+                cli.setSexo(rs.getString("sexo"));
+                retorno.add(cli);
             }
-            
+
             stmt.close();
+            return retorno;
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
     }
-    
+
+    public Cliente consultarClienteId(Cliente cli) {
+        String sql = "SELECT * FROM cliente WHERE idCliente=?";
+
+        try {
+            PreparedStatement stmt = con.prepareStatement(sql);
+            stmt.setInt(1, cli.getIdCliente());
+
+            ResultSet rs = stmt.executeQuery(sql);
+
+            while (rs.next()) {
+                cli.setNome(rs.getString("nome"));
+                cli.setEndereco(rs.getString("endereco"));
+                cli.setIdade(rs.getInt("idade"));
+                cli.setCpf(rs.getFloat("cpf"));
+                cli.setSexo(rs.getString("sexo"));
+
+            }
+            stmt.close();
+            return cli;
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
     public void atualizarCliente(Cliente cli) {
         String sql = "UPDATE cliente SET nome=?,endereco=?,idade=?,cpf=?,sexo=? WHERE idCliente=?";
 
@@ -106,7 +137,7 @@ public class ClienteDao {
             System.out.println(cli.getNome() + " atualizado com sucesso!");
             //Fechando a conexao
             stmt.close();
-            } catch (SQLException e) {
+        } catch (SQLException e) {
             throw new RuntimeException(e);
         }
     }

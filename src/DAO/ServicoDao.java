@@ -9,6 +9,8 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
 import model.Servico;
 
 /**
@@ -64,19 +66,43 @@ public class ServicoDao {
 
     }
 
-    public void visualizarServicos() {
+    public List<Servico> consultarServicos() {
         String sql = "SELECT * FROM servico";
         try {
             PreparedStatement stmt = con.prepareStatement(sql);
             ResultSet rs = stmt.executeQuery(sql);
+            List<Servico> retorno = new ArrayList<>();
 
             while (rs.next()) {
-                System.out.println("ID: " + rs.getInt("idservico"));
-                System.out.println("Descrição: " + rs.getString("nome"));
-                System.out.println("-----------------------------");
+                Servico serv = new Servico();
+                serv.setIdservico(rs.getInt("idproduto"));
+                serv.setNome(rs.getString("nome"));
+                serv.setValor(rs.getFloat("valor"));
+                retorno.add(serv);
             }
-
             stmt.close();
+            return retorno;
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    public Servico consultarServicoId(Servico serv) {
+        String sql = "SELECT * FROM servico WHERE idservico=?";
+
+        try {
+            PreparedStatement stmt = con.prepareStatement(sql);
+            stmt.setInt(1, serv.getIdservico());
+
+            ResultSet rs = stmt.executeQuery(sql);
+
+            while (rs.next()) {
+                serv.setNome(rs.getString("nome"));
+                serv.setValor(rs.getFloat("valor"));
+
+            }
+            stmt.close();
+            return serv;
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }

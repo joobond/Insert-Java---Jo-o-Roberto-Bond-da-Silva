@@ -9,6 +9,8 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
 import model.Produto;
 
 /**
@@ -65,19 +67,45 @@ public class ProdutoDao {
 
     }
     
-    public void visualizarProdutos() {
+    public List<Produto> consultarProdutos() {
         String sql = "SELECT * FROM produto";
         try {
             PreparedStatement stmt = con.prepareStatement(sql);
             ResultSet rs = stmt.executeQuery(sql);
+            List<Produto> retorno = new ArrayList<>();
 
             while (rs.next()) {
-                System.out.println("ID: "+rs.getInt("idproduto"));
-                System.out.println("Descrição: "+rs.getString("nome"));
-                System.out.println("-----------------------------");
+                Produto pro = new Produto();
+                pro.setIdproduto(rs.getInt("idproduto"));
+                pro.setNome(rs.getString("nome"));
+                pro.setPreco(rs.getDouble("preco"));
+                pro.setQuantidade(rs.getFloat("quantidade"));
+                retorno.add(pro);
             }
-            
             stmt.close();
+            return retorno;
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+    }
+    
+    public Produto consultarProdutoId(Produto pro){
+        String sql = "SELECT * FROM produto WHERE idproduto=?";
+        
+        try {
+            PreparedStatement stmt = con.prepareStatement(sql);
+            stmt.setInt(1, pro.getIdproduto());
+            
+            ResultSet rs = stmt.executeQuery(sql);
+            
+            while(rs.next()){
+                pro.setNome(rs.getString("nome"));
+                pro.setPreco(rs.getDouble("preco"));
+                pro.setQuantidade(rs.getFloat("quantidade"));
+                
+            }
+            stmt.close();
+            return pro;
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
