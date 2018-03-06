@@ -26,13 +26,13 @@ public class ServicoDao {
     }
 
     public void inserirServico(Servico serv) {
-        String sql = "INSERT INTO servico (idservico,nome,valor) VALUES (?,?,?)";
+        String sql = "INSERT INTO servico (id,nome,valor) VALUES (?,?,?)";
 
         try {
             PreparedStatement stmt = con.prepareStatement(sql);
 
             //Passando a informação
-            stmt.setInt(1, serv.getIdservico());
+            stmt.setInt(1, serv.getId());
             stmt.setString(2, serv.getNome());
             stmt.setDouble(3, serv.getValor());
 
@@ -53,7 +53,7 @@ public class ServicoDao {
             //Preparando
             PreparedStatement stmt = con.prepareStatement(sql);
             //Passando as informações
-            stmt.setInt(1, serv.getIdservico());
+            stmt.setInt(1, serv.getId());
             //Executando
             stmt.execute();
             //Fechando
@@ -75,7 +75,7 @@ public class ServicoDao {
 
             while (rs.next()) {
                 Servico serv = new Servico();
-                serv.setIdservico(rs.getInt("idproduto"));
+                serv.setId(rs.getInt("id"));
                 serv.setNome(rs.getString("nome"));
                 serv.setValor(rs.getFloat("valor"));
                 retorno.add(serv);
@@ -88,11 +88,11 @@ public class ServicoDao {
     }
 
     public Servico consultarServicoId(Servico serv) {
-        String sql = "SELECT * FROM servico WHERE idservico=?";
+        String sql = "SELECT * FROM servico WHERE id=?";
 
         try {
             PreparedStatement stmt = con.prepareStatement(sql);
-            stmt.setInt(1, serv.getIdservico());
+            stmt.setInt(1, serv.getId());
 
             ResultSet rs = stmt.executeQuery(sql);
 
@@ -109,7 +109,7 @@ public class ServicoDao {
     }
 
     public void atualizarServico(Servico serv) {
-        String sql = "UPDATE servico SET nome=?,valor=? WHERE idservico=?";
+        String sql = "UPDATE servico SET nome=?,valor=? WHERE id=?";
 
         try {
             PreparedStatement stmt = con.prepareStatement(sql);
@@ -117,7 +117,7 @@ public class ServicoDao {
             //Passando a informação
             stmt.setString(1, serv.getNome());
             stmt.setDouble(2, serv.getValor());
-            stmt.setInt(3, serv.getIdservico());
+            stmt.setInt(3, serv.getId());
 
             //Executando a query
             stmt.execute();

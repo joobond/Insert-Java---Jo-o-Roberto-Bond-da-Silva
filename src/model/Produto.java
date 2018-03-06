@@ -15,17 +15,17 @@ public class Produto {
         
     }
      
-    int idproduto;
+    int id;
     String nome;
-    double preco;
+    double valor;
     float quantidade;
 
-    public int getIdproduto() {
-        return idproduto;
+    public int getId() {
+        return id;
     }
 
-    public void setIdproduto(int idproduto) {
-        this.idproduto = idproduto;
+    public void setId(int id) {
+        this.id = id;
     }
 
     public String getNome() {
@@ -36,12 +36,12 @@ public class Produto {
         this.nome = nome;
     }
 
-    public double getPreco() {
-        return preco;
+    public double getValor() {
+        return valor;
     }
 
-    public void setPreco(double preco) {
-        this.preco = preco;
+    public void setValor(double valor) {
+        this.valor = valor;
     }
 
     public float getQuantidade() {

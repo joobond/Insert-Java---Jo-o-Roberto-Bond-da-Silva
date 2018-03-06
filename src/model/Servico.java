@@ -11,16 +11,16 @@ package model;
  */
 public class Servico {
 
-    int idservico;
+    int id;
     String nome;
     double valor;
 
-    public int getIdservico() {
-        return idservico;
+    public int getId() {
+        return id;
     }
 
-    public void setIdservico(int idservico) {
-        this.idservico = idservico;
+    public void setId(int id) {
+        this.id = id;
     }
 
     public String getNome() {

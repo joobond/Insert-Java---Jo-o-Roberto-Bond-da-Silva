@@ -26,15 +26,15 @@ public class ProdutoDao {
     }
     
     public void inserirProduto(Produto produto){
-        String sql = "INSERT INTO produto (idproduto,nome,preco,quantidade) VALUES (?,?,?,?)";
+        String sql = "INSERT INTO produto (id,nome,valor,quantidade) VALUES (?,?,?,?)";
         
         try {
             PreparedStatement stmt =  con.prepareStatement(sql);
             
             //Passando a informação
-            stmt.setInt(1, produto.getIdproduto());
+            stmt.setInt(1, produto.getId());
             stmt.setString(2, produto.getNome());
-            stmt.setDouble(3, produto.getPreco());
+            stmt.setDouble(3, produto.getValor());
             stmt.setFloat(4, produto.getQuantidade());
             
             //Executando a query
@@ -48,13 +48,13 @@ public class ProdutoDao {
     }
     
     public void deletarProduto(Produto pro) throws SQLException {
-        String sql = "DELETE FROM produto WHERE idproduto=?";
+        String sql = "DELETE FROM produto WHERE id=?";
 
         try {
             //Preparando
             PreparedStatement stmt = con.prepareStatement(sql);
             //Passando as informações
-            stmt.setInt(1, pro.getIdproduto());
+            stmt.setInt(1, pro.getId());
             //Executando
             stmt.execute();
             //Fechando
@@ -76,9 +76,9 @@ public class ProdutoDao {
 
             while (rs.next()) {
                 Produto pro = new Produto();
-                pro.setIdproduto(rs.getInt("idproduto"));
+                pro.setId(rs.getInt("id"));
                 pro.setNome(rs.getString("nome"));
-                pro.setPreco(rs.getDouble("preco"));
+                pro.setValor(rs.getDouble("valor"));
                 pro.setQuantidade(rs.getFloat("quantidade"));
                 retorno.add(pro);
             }
@@ -90,17 +90,17 @@ public class ProdutoDao {
     }
     
     public Produto consultarProdutoId(Produto pro){
-        String sql = "SELECT * FROM produto WHERE idproduto=?";
+        String sql = "SELECT * FROM produto WHERE id=?";
         
         try {
             PreparedStatement stmt = con.prepareStatement(sql);
-            stmt.setInt(1, pro.getIdproduto());
+            stmt.setInt(1, pro.getId());
             
             ResultSet rs = stmt.executeQuery(sql);
             
             while(rs.next()){
                 pro.setNome(rs.getString("nome"));
-                pro.setPreco(rs.getDouble("preco"));
+                pro.setValor(rs.getDouble("valor"));
                 pro.setQuantidade(rs.getFloat("quantidade"));
                 
             }
@@ -112,16 +112,16 @@ public class ProdutoDao {
     }
     
     public void atualizarProduto(Produto pro) {
-        String sql = "UPDATE produto SET nome=?,preco=?,quantidade=? WHERE idproduto=?";
+        String sql = "UPDATE produto SET nome=?,valor=?,quantidade=? WHERE id=?";
 
         try {
             PreparedStatement stmt = con.prepareStatement(sql);
 
             //Passando a informação
             stmt.setString(1, pro.getNome());
-            stmt.setDouble(2, pro.getPreco());
+            stmt.setDouble(2, pro.getValor());
             stmt.setFloat(3, pro.getQuantidade());
-            stmt.setInt(4, pro.getIdproduto());
+            stmt.setInt(4, pro.getId());
 
             //Executando a query
             stmt.execute();

@@ -1,14 +1,18 @@
 package testes;
 
 import DAO.ClienteDao;
+import DAO.OrdemServicoDao;
 import DAO.ProdutoDao;
 import DAO.ServicoDao;
+import DAO.VendaDao;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 import model.Cliente;
+import model.OrdemServico;
 import model.Produto;
 import model.Servico;
+import model.Venda;
 
 
 /*
@@ -32,31 +36,31 @@ public class Teste {
         // TODO code application logic here
         
         //Produto
-//        Produto p = new Produto();
-//        p.setIdproduto(1);
-//        p.setNome("Camisinha");
-//        p.setPreco(15);
-//        p.setQuantidade(10);
+        Produto p = new Produto();
+        p.setId(15);
+        p.setNome("Camisinha");
+        p.setValor(15);
+        p.setQuantidade(10);
         List<Produto> listaProduto = new ArrayList<>();
-////        
-        ProdutoDao pdao = new ProdutoDao();
+//        
+//        ProdutoDao pdao = new ProdutoDao();
 //        pdao.inserirProduto(p);
 //        pdao.deletarProduto(p);
 //        pdao.atualizarProduto(p);
-        listaProduto=pdao.consultarProdutos();
+//        listaProduto=pdao.consultarProdutos();
         
-        for(Produto p : listaProduto){
-            System.out.println("ID: "+p.getIdproduto());
-            System.out.println("Nome: "+p.getNome());
-            System.out.println("---------------------------");
-        }
+//        for(Produto p : listaProduto){
+//            System.out.println("ID: "+p.getIdproduto());
+//            System.out.println("Nome: "+p.getNome());
+//            System.out.println("---------------------------");
+//        }
         
         //Serviço
 //        Servico serv = new Servico();
-//        serv.setIdservico(1);
+//        serv.setId(8);
 //        serv.setNome("Acompanhantes");
 //        serv.setValor(200);
-//        
+////        
 //        ServicoDao sdao = new ServicoDao();
 //        sdao.inserirServico(serv);
 //        sdao.deletarServico(serv);
@@ -65,13 +69,12 @@ public class Teste {
         
         
         //Cliente
-//        Cliente cli = new Cliente();
-//        cli.setIdCliente(2);
-//        cli.setNome("João Bond");
-//        cli.setEndereco("Rua dos Bobos Nº 0");
-//        cli.setIdade(19);
-//        cli.setCpf(654321);
-//        cli.setSexo("M");
+        Cliente cli = new Cliente();
+        cli.setId(7);
+        cli.setNome("João Bond");
+        cli.setEndereco("Rua dos Bobos Nº 0");
+        cli.setIdade(19);
+        cli.setCpf(654321);
 //        
 //        ClienteDao cdao = new ClienteDao();
 //        cdao.inserirCliente(cli);
@@ -79,6 +82,28 @@ public class Teste {
 //        cdao.visualizarClientes();
 //        cdao.atualizarCliente(cli);
        
+//          OrdemServico os = new OrdemServico();
+//          os.setId(2);
+//          os.setDescricao("Formatação de computador");
+//          os.setCli(cli);
+//          os.setServ(serv);
+//          
+//          OrdemServicoDao osdao = new OrdemServicoDao();
+//          osdao.inserirOS(os);
+//          osdao.ConsultarId(os);
+//          osdao.deletarOS(os);
+        
+        //Venda
+        Venda ven = new Venda();
+        ven.setId(1);
+        ven.setCli(cli);
+        ven.setPro(p);
+        ven.setValor(35);
+        
+        VendaDao vdao = new VendaDao();
+//        vdao.incluirVenda(ven);
+        //vdao.ConsultarId(ven);
+        vdao.deletarVenda(ven);
         
     }
     

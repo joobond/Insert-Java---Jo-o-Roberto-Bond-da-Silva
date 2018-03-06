@@ -10,19 +10,18 @@ package model;
  * @author Bond
  */
 public class Cliente {
-    int idCliente;
+    int id;
     String nome;
     String endereco;
     int idade;
     float cpf;
-    String sexo;
 
-    public int getIdCliente() {
-        return idCliente;
+    public int getId() {
+        return id;
     }
 
-    public void setIdCliente(int idCliente) {
-        this.idCliente = idCliente;
+    public void setId(int id) {
+        this.id = id;
     }
 
     public String getNome() {
@@ -56,14 +55,5 @@ public class Cliente {
     public void setCpf(float cpf) {
         this.cpf = cpf;
     }
-
-    public String getSexo() {
-        return sexo;
-    }
-
-    public void setSexo(String sexo) {
-        this.sexo = sexo;
-    }
-    
     
 }

@@ -26,18 +26,17 @@ public class ClienteDao {
     }
 
     public void inserirCliente(Cliente cli) {
-        String sql = "INSERT INTO cliente (idCliente,nome,endereco,idade,cpf,sexo) VALUES (?,?,?,?,?,?)";
+        String sql = "INSERT INTO cliente (id,nome,endereco,idade,cpf) VALUES (?,?,?,?,?)";
 
         try {
             PreparedStatement stmt = con.prepareStatement(sql);
 
             //Passando a informação
-            stmt.setInt(1, cli.getIdCliente());
+            stmt.setInt(1, cli.getId());
             stmt.setString(2, cli.getNome());
             stmt.setString(3, cli.getEndereco());
             stmt.setInt(4, cli.getIdade());
             stmt.setFloat(5, cli.getCpf());
-            stmt.setString(6, cli.getSexo());
 
             //Executando a query
             stmt.execute();
@@ -50,13 +49,13 @@ public class ClienteDao {
     }
 
     public void deletarCliente(Cliente cli) throws SQLException {
-        String sql = "DELETE FROM cliente WHERE idCliente=?";
+        String sql = "DELETE FROM cliente WHERE id=?";
 
         try {
             //Preparando
             PreparedStatement stmt = con.prepareStatement(sql);
             //Passando as informações
-            stmt.setInt(1, cli.getIdCliente());
+            stmt.setInt(1, cli.getId());
             //Executando
             stmt.execute();
             //Fechando
@@ -78,12 +77,11 @@ public class ClienteDao {
 
             while (rs.next()) {
                 Cliente cli = new Cliente();
-                cli.setIdCliente(rs.getInt("idCliente"));
+                cli.setId(rs.getInt("id"));
                 cli.setNome(rs.getString("nome"));
                 cli.setEndereco(rs.getString("endereco"));
                 cli.setIdade(rs.getInt("idade"));
                 cli.setCpf(rs.getFloat("cpf"));
-                cli.setSexo(rs.getString("sexo"));
                 retorno.add(cli);
             }
 
@@ -95,11 +93,11 @@ public class ClienteDao {
     }
 
     public Cliente consultarClienteId(Cliente cli) {
-        String sql = "SELECT * FROM cliente WHERE idCliente=?";
+        String sql = "SELECT * FROM cliente WHERE id=?";
 
         try {
             PreparedStatement stmt = con.prepareStatement(sql);
-            stmt.setInt(1, cli.getIdCliente());
+            stmt.setInt(1, cli.getId());
 
             ResultSet rs = stmt.executeQuery(sql);
 
@@ -108,7 +106,6 @@ public class ClienteDao {
                 cli.setEndereco(rs.getString("endereco"));
                 cli.setIdade(rs.getInt("idade"));
                 cli.setCpf(rs.getFloat("cpf"));
-                cli.setSexo(rs.getString("sexo"));
 
             }
             stmt.close();
@@ -119,7 +116,7 @@ public class ClienteDao {
     }
 
     public void atualizarCliente(Cliente cli) {
-        String sql = "UPDATE cliente SET nome=?,endereco=?,idade=?,cpf=?,sexo=? WHERE idCliente=?";
+        String sql = "UPDATE cliente SET nome=?,endereco=?,idade=?,cpf=? WHERE id=?";
 
         try {
             PreparedStatement stmt = con.prepareStatement(sql);
@@ -129,8 +126,7 @@ public class ClienteDao {
             stmt.setString(2, cli.getEndereco());
             stmt.setInt(3, cli.getIdade());
             stmt.setFloat(4, cli.getCpf());
-            stmt.setString(5, cli.getSexo());
-            stmt.setInt(6, cli.getIdCliente());
+            stmt.setInt(5, cli.getId());
 
             //Executando a query
             stmt.execute();
