@@ -10,11 +10,11 @@ package model;
  * @author Bond
  */
 public class Cliente {
-    int id;
-    String nome;
-    String endereco;
-    int idade;
-    float cpf;
+    private int id;
+    private String nome;
+    private String endereco;
+    private int idade;
+    private float cpf;
 
     public int getId() {
         return id;

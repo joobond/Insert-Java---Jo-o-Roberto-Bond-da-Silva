@@ -87,23 +87,45 @@ public class Teste {
 //          os.setDescricao("Formatação de computador");
 //          os.setCli(cli);
 //          os.setServ(serv);
-//          
+//        
+//        List<OrdemServico> listaOS = new ArrayList<>();
+////          
 //          OrdemServicoDao osdao = new OrdemServicoDao();
+//          listaOS = osdao.consultarOS();
+//          
+//          for (OrdemServico o : listaOS) {
+//              System.out.println("ID: "+o.getId());
+//              System.out.println("Descrição: "+o.getDescricao());
+//              System.out.println("Cliente: "+o.getCli().getId());
+//              System.out.println("Serviço: "+o.getServ().getId());
+//              System.out.println("---------------------------------------");
+//        }
 //          osdao.inserirOS(os);
 //          osdao.ConsultarId(os);
 //          osdao.deletarOS(os);
         
         //Venda
         Venda ven = new Venda();
-        ven.setId(1);
+        //ven.setId(1);
         ven.setCli(cli);
         ven.setPro(p);
         ven.setValor(35);
         
         VendaDao vdao = new VendaDao();
+        List<Venda> listaVen = new ArrayList<>();         
+          listaVen = vdao.consultarVenda();
+          
+          for (Venda v : listaVen) {
+              System.out.println("ID: "+v.getId());
+              System.out.println("Valor: "+v.getValor());
+              System.out.println("Cliente: "+v.getCli().getId());
+              System.out.println("PRoduto: "+v.getPro().getId());
+              System.out.println("---------------------------------------");
+        }
 //        vdao.incluirVenda(ven);
         //vdao.ConsultarId(ven);
-        vdao.deletarVenda(ven);
+//        vdao.deletarVenda(ven);
+        
         
     }
     

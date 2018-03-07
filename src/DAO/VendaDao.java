@@ -10,6 +10,8 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.ArrayList;
+import java.util.List;
 import model.Cliente;
 import model.Produto;
 import model.Venda;
@@ -76,6 +78,33 @@ public class VendaDao {
             System.out.println("Excluido com sucesso!");
         } catch (SQLException ex) {
             System.out.println("Houve um erro ao deletar a venda.");
+        }
+    }
+    
+    public List<Venda> consultarVenda() {
+        String sql = "SELECT * FROM venda INNER JOIN cliente ON venda.cliente_id = cliente.id "
+                + "INNER JOIN produto ON produto.id = venda.produto_id";
+        try {
+            PreparedStatement stmt = con.prepareStatement(sql);
+            ResultSet rs = stmt.executeQuery(sql);
+            List<Venda> retorno = new ArrayList<>();
+
+            while (rs.next()) {
+                Cliente cli = new Cliente();
+                cli.setId(rs.getInt("cliente_id"));
+                Produto pro = new Produto();
+                pro.setId(rs.getInt("produto_id"));
+                Venda ven = new Venda();
+                ven.setId(rs.getInt("id"));
+                ven.setValor(rs.getDouble("valor"));
+                ven.setCli(cli);
+                ven.setPro(pro);
+                retorno.add(ven);
+            }
+            stmt.close();
+            return retorno;
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
         }
     }
 }
