@@ -115,10 +115,9 @@ public class Poupex {
                     double i = Double.parseDouble(jurosT.getText());
                     int t = Integer.parseInt(anosT.getText());
                     i = i/100;
-                    t = t * 12;
-                    c= c*t;
+                    t = t * 12; 
 
-                    double p = c*(1+(i * t));
+                    double p = c*((Math.pow((1+i), t)-1)/i);
                     DecimalFormat df = new DecimalFormat("###,###,###,###.00");
 
                     poupadoT.setText("R$ "+df.format(p));
